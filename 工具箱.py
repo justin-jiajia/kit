@@ -37,28 +37,28 @@ def cxjz():
     global text1
     # 获取一句诗
     try:
-        re = requests.get('https://v1.hitokoto.cn', params={'c': 'i', 'max_length': '16'})
+        re = requests.get('https://v1.hitokoto.cn', params={'c': 'i', 'max_length': '17', 'min_length': '15'})
     except requests.exceptions.ConnectionError:
         text1 = Label(home, text='诗词加载失败', font=('楷体 常规', 16))
         text1.grid(column=0, row=1)
         showerror('错误', '网络连接出错，加载每日诗词失败！')
     else:
         sh = re.json()
-        ch = sh['hitokoto'] + '——' + sh['from_who'] + '《' + sh['from'] + '》'  # 格式化出处、来源
+        ch = sh['hitokoto'] + '\n——' + sh['from_who'] + '《' + sh['from'] + '》'  # 格式化出处、来源
         # 将诗词放在屏幕上
         text1.configure(text=ch)
 
 
 # 获取一句诗
 try:
-    r = requests.get('https://v1.hitokoto.cn', params={'c': 'i', 'max_length': '16'})
+    r = requests.get('https://v1.hitokoto.cn', params={'c': 'i', 'max_length': '17', 'min_length': '15'})
 except requests.exceptions.ConnectionError:
     text1 = Label(home, text='诗词加载失败', font=('楷体 常规', 18))
     text1.grid(column=0, row=1)
     showerror('错误', '网络连接出错，加载每日诗词失败！')
 else:
     i = r.json()
-    c = i['hitokoto'] + '——' + i['from_who'] + '《' + i['from'] + '》'
+    c = i['hitokoto'] + '\n——' + i['from_who'] + '《' + i['from'] + '》'
 
     text1 = Label(home, text=c, font=('楷体 常规', 18))
     text1.grid(column=0, row=0)
